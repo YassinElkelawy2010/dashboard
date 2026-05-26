@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum CommandResponseType {
+  TEXT
+  EMBED
+}
+
+enum CommandOptionType {
+  STRING
+  INTEGER
+  BOOLEAN
+  USER
+  CHANNEL
+  ROLE
+}
+
+model Command {
+  id          String              @id @default(cuid())
+  name        String              @unique
+  description String
+  enabled     Boolean             @default(true)
+  guildOnly   Boolean             @default(true)
+  dmPermission Boolean            @default(false)
+
+  responseType     CommandResponseType @default(TEXT)
+  responseTemplate Json
+  ephemeral        Boolean             @default(true)
+  extras           Json                @default("{}")
+
+  options     CommandOption[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([enabled])
+  @@index([updatedAt])
+}
+
+model CommandOption {
+  id          String            @id @default(cuid())
+  commandId   String
+  command     Command           @relation(fields: [commandId], references: [id], onDelete: Cascade)
+
+  type        CommandOptionType
+  name        String
+  description String
+  required    Boolean           @default(false)
+  enabled     Boolean           @default(true)
+  position    Int               @default(0)
+
+  min         Int?
+  max         Int?
+  choices     Json?
+
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([commandId, position])
+  @@unique([commandId, name])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actor      String
+  action     String
+  entityType String
+  entityId   String
+  before     Json?
+  after      Json?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+model NativeCommandSetting {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([enabled])
+}
+
+model BotSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
