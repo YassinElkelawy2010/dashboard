@@ -471,7 +471,7 @@ export function CommandForm(props: {
               <div className="space-y-2">
                 <div className="text-xs font-semibold uppercase tracking-wider text-white/45">Reaction emojis (max 20)</div>
                 <p className="text-xs text-white/45">Unicode (✅) or custom (&lt;:name:id&gt;, &lt;a:name:id&gt;). Applied in order.</p>
-                {v.extras.autoReactionEmojis.map((emoji, ei) => (
+                {v.extras.autoReactionEmojis.map((emoji: string, ei: number) => (
                   <div key={ei} className="flex gap-2">
                     <input
                       value={emoji}
@@ -487,7 +487,7 @@ export function CommandForm(props: {
                       type="button"
                       className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80 hover:bg-white/10"
                       onClick={() => {
-                        const next = v.extras.autoReactionEmojis.filter((_, i) => i !== ei);
+                        const next = v.extras.autoReactionEmojis.filter((_: string, i: number) => i !== ei);
                         setV({
                           ...v,
                           extras: {

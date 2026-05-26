@@ -3,7 +3,7 @@ import { getIronSession } from "iron-session";
 import type { SessionData } from "./lib/session";
 import { getGvrcSessionOptions } from "./lib/sessionConfig";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   if (!req.nextUrl.pathname.startsWith("/app")) return NextResponse.next();
 
   const res = NextResponse.next();
