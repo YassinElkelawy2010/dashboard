@@ -120,7 +120,7 @@ export function defaultCommandFormValue(): CommandFormValue {
     responseTemplateText: "Hello {{user}}! You ran /{{command}}.",
     responseTemplateEmbeds: [
       {
-        title: "GVRA",
+        title: "OGVC",
         description: "Hello {{user}}!",
         color: "#f9a8d8",
         bannerUrl: "",
@@ -361,7 +361,7 @@ export function CommandForm(props: {
       user: "@DriverUser",
       username: "DriverUser",
       command: v.name || "command",
-      guild: "GVRA Server",
+      guild: "OGVC Server",
       channel: "#general",
       options: Object.fromEntries(
         v.options

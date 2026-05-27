@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GVRA Command Dashboard",
-  description: "Manage configurable Discord slash commands for GVRA Bot",
+  title: "OGVC Command Dashboard",
+  description: "Manage configurable Discord slash commands for OGVC Bot",
 };
 
 export default function RootLayout({

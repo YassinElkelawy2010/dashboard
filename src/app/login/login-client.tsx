@@ -17,7 +17,7 @@ export function LoginClient() {
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-lg flex-col justify-center px-6 py-16">
       <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur">
-        <div className="text-sm font-semibold uppercase tracking-wider text-white/50">GVRA</div>
+        <div className="text-sm font-semibold uppercase tracking-wider text-white/50">OGVC</div>
         <div className="mt-2 text-3xl font-semibold tracking-tight">Command Dashboard</div>
         <div className="mt-2 text-sm text-white/60">Sign in with your local admin credentials.</div>
 
