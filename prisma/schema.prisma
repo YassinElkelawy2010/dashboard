@@ -32,7 +32,9 @@ model Command {
   responseType     CommandResponseType @default(TEXT)
   responseTemplate Json
   ephemeral        Boolean             @default(true)
-  extras           Json                @default("{}")
+  // NOTE: SQLite cannot use a JSON literal like {} as a DEFAULT.
+  // Use a quoted string so Prisma can apply it in SQLite.
+  extras           Json                @default(dbgenerated("'{}'"))
 
   options     CommandOption[]
   createdAt   DateTime            @default(now())
